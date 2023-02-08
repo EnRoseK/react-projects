@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { createContext, useState } from 'react';
 import './App.css';
 import { Footer } from './components/Footer';
@@ -6,7 +7,9 @@ import { Switcher } from './components/Switcher';
 export const ThemeContext = createContext('');
 
 const App = () => {
-  const [theme, setTheme] = useState('light');
+  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
+
+  useEffect(() => localStorage.setItem('theme', theme), [theme]);
 
   return (
     <ThemeContext.Provider value={theme}>
